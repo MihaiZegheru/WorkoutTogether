@@ -1,0 +1,27 @@
+<%- include('partials/headerGroup'); -%>
+
+<body>
+    <div class="card bg-gray card-margin bg-gray text-center" style="width: 18rem;">
+        <img src="/res/trophyCardPicture.png" class="card-img-top" alt="cup image">
+        <div class="card-body">
+            <h4 class="card-title">You have earned</h4>
+            <h5 class="card-text"><%= workoutpoints %>  points</h5>
+            <h5 class="card-text">for completing this workout!</h5>
+        </div>
+        <button class="card-margin" id="continue-button"> Continue </button>
+
+    </div>
+    
+
+</body>
+
+<script>
+    document.getElementById("continue-button").onclick = continueAction;
+    function continueAction() {
+        var pathArray = window.location.pathname.split('/');
+        window.location.assign('/' + pathArray[1] + '/' + pathArray[2] +'/top');
+    }
+
+</script>
+
+<%- include('partials/footer'); -%>

@@ -1,0 +1,164 @@
+<%- include('partials/headerGroup'); -%>
+
+<body>
+    <div id="start-section">
+
+        <div class="card bg-gray card-margin bg-gray" style="width: 18rem;">
+
+                <img src="/res/workoutCardPicture.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%= workout.workoutname %></h5>
+                    <p class="card-text">**Quick description** (to be added).</p>
+                </div>
+                <button class="card-margin" id="start-workout-button"> Start </button>
+        </div>
+        
+    </div>
+    <div id="done-section">
+        
+        <div class="card bg-gray card-margin bg-gray text-center" style="width: 18rem;">
+
+            <img src="/res/workoutCardPicture.png" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Well done for completing this workout!</h5>
+                <p class="card-text">You have burned nnn calories.</p>
+                <p class="card-text">It took you nn minutes to finish this workout!</p>
+            </div>
+            <button class="card-margin" id="finish-workout-button"> Finish </button>
+        </div>
+        
+    </div>
+    <div id="exercise-section">
+        <div class="card bg-gray card-margin" style="width: 18rem;">
+            <img src="/res/workoutCardPicture.png" class="card-img-top" alt="Video/Avatar">
+            <div class="card-body">
+                <h5 id="exercise-name" class="card-title">Exercise name</h5>
+            </div>
+        </div>
+    </div>
+    <div id="break-section">
+        <div class="card bg-gray card-margin" style="width: 18rem;">
+            <img src="/res/workoutCardPicture.png" class="card-img-top" alt="Break video">
+            <div class="card-body">
+                <h5 class="card-title">Take your break!</h5>
+            </div>
+        </div>
+    </div>
+    <div class="timer-pos start-50 end-50" id="timer-section">
+        <span class="position-absolute start-50 translate-middle timer" id="timer"></span>
+    </div>
+</body>
+
+<script>
+    let type;
+    let numberOfExercise = -1;
+    let numberOfExercises;
+    let loadedExercises;
+    let loadedExercisesValue;
+    let loadedBreaksValue;
+    
+    const startSection = document.getElementById("start-section");
+    const exerciseSection = document.getElementById("exercise-section");
+    const breakSection = document.getElementById("break-section");
+    const timerSection = document.getElementById("timer-section");
+    const doneSection = document.getElementById("done-section");
+
+    timer = document.getElementById('timer');
+
+    breakSection.style.display = "none";
+    exerciseSection.style.display = "none";
+    timerSection.style.display = "none";
+    doneSection.style.display = "none";
+
+
+    document.getElementById("start-workout-button").onclick = requestData;
+    document.getElementById("finish-workout-button").onclick = finishWorkout;
+
+    function finishWorkout() {
+        window.location.href = window.location.href + "/completed";
+    }
+
+    function breakAction() {
+        exerciseSection.style.display = "none";
+        breakSection.style.display = "block";
+        timerSection.style.display = "block";
+
+        if (loadedExercises[1] === undefined)
+        {
+            // end of the exercise
+            exerciseSection.style.display = "none";
+            startSection.style.display = "none";
+            breakSection.style.display = "none";
+            timerSection.style.display = "none";
+            doneSection.style.display = "block";
+        }
+        timer.innerHTML = String(Number(loadedBreaksValue[0]) + 1);
+        startTimer(requestData);
+
+    }
+
+    async function requestData() {
+        try {
+            const res = await fetch(String(window.location.pathname), {
+                method: 'POST',
+                body: JSON.stringify({ numberOfExercise: numberOfExercise }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.numberOfExercises > 0) {
+                exerciseSection.style.display = "block";
+                startSection.style.display = "none";
+                breakSection.style.display = "none";
+                timerSection.style.display = "block";
+                doneSection.style.display = "none";
+
+                type = data.workoutType;
+                numberOfExercise = data.numberOfExercise;
+                numberOfExercises = data.numberOfExercises;
+
+                loadedExercises = data.exercises;
+                loadedExercisesValue = data.exercisesValue;
+                loadedBreaksValue = data.breaksValue;
+                console.log(loadedExercises)
+                document.getElementById("exercise-name").innerHTML = loadedExercises[0].exercisename;
+
+                //timer -> after done call the break function
+                timer.innerHTML = String(Number(loadedExercisesValue[0]) + 1);
+                startTimer(breakAction);
+            }
+            else {
+                //completed ex but handled by the break function, might change later
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    function startTimer(nextActionFunction) {
+        var presentTime = document.getElementById('timer').innerHTML;
+
+        if (presentTime <= 0) {
+            nextActionFunction();
+            return;
+        }
+        presentTime = computeSecond(presentTime - 1);
+        document.getElementById('timer').innerHTML = presentTime;
+        setTimeout(startTimer, 1000, nextActionFunction);
+        }
+
+    function computeSecond(sec) {
+        if (sec < 100 && sec >= 0) {
+            sec = "0" + sec;
+        }
+        if (sec < 10 && sec >= 0) {
+            sec = "0" + sec;
+        }
+        return sec;
+    }
+
+
+
+</script>
+
+<%- include('partials/footer'); -%>

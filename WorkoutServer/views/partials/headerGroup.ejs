@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0"/>
+  <title>Workout Together</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <div class="sticky-top bg-gray mb-1 d-flex top-bar justify-content-between">
+    <div class="p-2 bd-highlight">
+        <img class="profile-img-big" src="/res/groupPicture.png" alt="group picture">
+    </div>
+    <div class="p-2 bd-highlight">
+        <h3> <%= group.groupname %></h3>
+    </div>
+    <div class="ms-auto p-2 bd-highlight">    
+        <li class="nav-item dropdown color-gray d-flex">
+            <a class="" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+                <img class="hamburger-dropdown" src="/res/hamburgerButton.png" alt="hamburger button">
+            </a>
+            <ul class="dropdown-menu">
+                <li><a id="workouts-link" class="dropdown-item" href="#">Workouts</a></li>
+                <li><a id="top-link" class="dropdown-item" href="#">Top</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a id="add-workout-link" class="dropdown-item" href="#">Add a workout</a></li>
+            </ul>
+        </li>
+    </div>
+
+    <script>
+        document.getElementById("top-link").onclick = function redirectToTop() {
+            let pathArray = window.location.pathname.split('/');
+            window.location.assign('/' + pathArray[1] + '/' + pathArray[2] +'/top');
+        }
+
+        document.getElementById("workouts-link").onclick = function redirectToWorkouts() {
+            let pathArray = window.location.pathname.split('/');
+            window.location.assign('/' + pathArray[1] + '/' + pathArray[2]);
+        }
+
+        document.getElementById("add-workout-link").onclick = function redirectToAddWorkouts() {
+            let pathArray = window.location.pathname.split('/');
+            window.location.assign('/' + pathArray[1] + '/' + pathArray[2] + "/workout" + "/create");
+        }
+
+
+    </script>
+    
+    
+
+
+</head>
+
+    
+    
+  </div>
+  

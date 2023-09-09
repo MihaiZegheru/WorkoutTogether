@@ -1,0 +1,28 @@
+<%- include('partials/header'); -%>
+
+<body class="bg-gray">
+  <div class=" users-list">
+    <h2 class="top-title-card">Discover new people...</h2>
+    <% if (profiles.length > 0) { %>
+      <% profiles.forEach(profile => { %>
+        <div class="user-display-cell">
+          <a class="single" href="#"> <!--/<%= profile._id %>-->
+            <img class="profile-img" src="/res/profilePicture.png" alt="profile img">
+            <h4 class="profile-username"><%= profile.username%></h4>
+
+          </a>
+        </div>
+      <% }); %>
+    <% } else { %>
+        <p>There are no users to display.</p>
+    <% } %>
+  </div>
+
+</body>
+
+
+
+
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>

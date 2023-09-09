@@ -1,0 +1,41 @@
+<ul class="nav nav-pills mb-0 d-flex justify-content-center nav-fill navbar-expand fixed-bottom bg-gray navbar-light " id="pills-tab" role="navigation">
+    <li class="nav-item nav-fill">
+      <a class="nav-link" id="pills-groups-tab" data-toggle="pill" href="/group" role="tab" aria-controls="pills-home" aria-selected="false">Groups</a>
+    </li>
+    <li class="nav-item nav-fill">
+      <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="/" role="tab" aria-controls="pills-profile" aria-selected="false">
+        <img class="image-button" src="/res/homeButton.png" alt="homeButton">
+    </a>
+    </li>
+    <li class="nav-item nav-fill">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#" role="tab" aria-controls="pills-contact" aria-selected="false">Profile</a> <!--/profile-->
+    </li>
+</ul>
+
+
+    <script>
+        const groupsPill = document.getElementById("pills-groups-tab");
+        const homePill = document.getElementById("pills-home-tab");
+        const profilePill = document.getElementById("pills-profile-tab");
+
+        const pathName = window.location.pathname;
+
+        if (pathName.includes(profilePill.getAttribute("href"))) {
+            profilePill.setAttribute("aria-selected", "true");
+            groupsPill.setAttribute("class", "nav-link text-muted");
+            homePill.setAttribute("class", "nav-link ");
+            profilePill.setAttribute("class", "nav-link active bg-secondary");
+        }
+        else if (pathName.includes(groupsPill.getAttribute("href"))) {
+            groupsPill.setAttribute("aria-selected", "true");
+            groupsPill.setAttribute("class", "nav-link active bg-secondary");
+            homePill.setAttribute("class", "nav-link text-muted");
+            profilePill.setAttribute("class", "nav-link text-muted");
+        }    
+        else if (pathName.includes(homePill.getAttribute("href"))) {
+            homePill.setAttribute("aria-selected", "true");
+            homePill.setAttribute("class", "nav-link active bg-secondary");
+            groupsPill.setAttribute("class", "nav-link text-muted");
+            profilePill.setAttribute("class", "nav-link text-muted");
+        }   
+  </script>

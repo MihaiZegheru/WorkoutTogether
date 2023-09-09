@@ -1,0 +1,141 @@
+<%- include('partials/headerGroup'); -%>
+
+
+<body class="bg-gray">
+    <form class="bg-gray">
+        <h2>Create a workout</h2>
+        <label for="workoutname">Workout's Name</label>
+        <input class="bg-gray" type="text" name="workoutname" required />
+        <label for="type">Type</label>
+
+
+
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input  class="btn-check" type="radio" name="type" value="reps" autocomplete="off" id="reps" required />
+            <label  class="btn btn-outline-primary radio-button" for="reps">Reps</label>   
+
+            <input class="btn-check" type="radio" name="type" value="timed" autocomplete="off" id="timed" required />
+            <label class="btn btn-outline-primary radio-button" for="timed">Timed</label>
+        </div>
+          
+
+
+        
+        <div id="exercise-form">
+            <label for="exercises">Exercises</label>
+            <div id="exercise">
+                <select class="exercise-name bg-gray">
+                    <% if (exercises.length > 0) { %>
+                        <% exercises.forEach(exercise => { %>
+                            <option class="bg-gray" value="<%= exercise._id %>"><%= exercise.exercisename %></option>
+                        <% }); %>
+                      <% } %>
+                </select>
+                <label class="type-label" for="exerciseValue">Time / Reps</label>
+                <input class="bg-gray" type="number" name="exercise-value" required />
+                <label for="breakValue">Break Time</label>
+                <input class="bg-gray" type="number" name="break-value" />
+                <hr class="bg-gray">
+            </div>
+            <span id="add-exercise-form"></span>
+            <input class="radio-button" type="button" id="addFields" value="Add exercise" />
+        </div>
+
+        <button class="right down-button">Create</button>
+    </form>
+</body>
+
+<script>
+    let exercisesCounter = 0;
+    document.getElementById("addFields").onclick = addFields;
+    document.getElementById("exercise-form").style.display = "none";
+
+    document.getElementById("reps").onclick = changeReps;
+    document.getElementById("timed").onclick = changeTime;
+
+    function  changeReps() {
+       let elements = document.getElementsByClassName("type-label");
+       for (let i = 0; i < elements.length; i++) {
+           elements[i].innerHTML = "Reps";
+       }
+       document.getElementById("exercise-form").style.display = "block";
+    }
+
+    function  changeTime() {
+       let elements = document.getElementsByClassName("type-label");
+       for (let i = 0; i < elements.length; i++) {
+           elements[i].innerHTML = "Time (seconds)";
+       }
+       document.getElementById("exercise-form").style.display = "block";
+    }
+
+    function addFields() {
+	    exercisesCounter++;
+
+        let newFields = document.getElementById('exercise').cloneNode(true);
+        newFields.id = 'exercise';
+        let newField = newFields.childNodes;
+
+	    for (let i = 0; i < newField.length; i++) {
+            let objName = newField[i].name;
+        }
+
+        let insertPos = document.getElementById('add-exercise-form');
+	    insertPos.parentNode.insertBefore(newFields, insertPos);
+        window.onload = addFields;
+    }
+
+
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const workoutname = form.workoutname.value;
+
+        const radios = form.elements.type;
+        console.log(radios)
+        const type = Array
+               .from(radios)
+               .find(radio => radio.checked).value;
+
+        console.log(type)
+        const exercisesId = [];
+        const exercisesValue = [];
+        const breaksValue = [];
+
+        const exercises = document.getElementsByClassName("exercise-name");
+        const exValues = document.getElementsByName("exercise-value");
+        const brValues = document.getElementsByName("break-value");
+
+        for (let i = 0; i <= exercisesCounter; i++) {
+            exercisesId.push(exercises[i].value);
+            exercisesValue.push(exValues[i].value);
+            breaksValue.push(brValues[i].value);
+        }
+
+        try {
+            const res = await fetch(String(window.location.pathname), {
+                method: 'POST',
+                body: JSON.stringify({ workoutname: workoutname, type: type, exercisesId: exercisesId, exercisesValue: exercisesValue, breaksValue: breaksValue }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            console.log(data);
+
+            if (data.group) {
+                location.assign(window.location.pathname.replace('/workout/create', ''));
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+
+
+</script>
+
+
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>

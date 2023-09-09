@@ -1,0 +1,60 @@
+<%- include ('partials/header'); -%> 
+
+<form class="bg-gray">
+    <h2>Log in</h2>
+    <label for="email">Username / Email</label>
+    <input class="bg-gray" type="text" name="email" required />
+    <div class="email error"></div>
+    <label for="password">Password</label>
+    <input class="bg-gray" type="password" name="password" required />
+    <div class="password error"></div>
+    <input class="checkbox" type="checkbox" name="remember" value=true />
+    <label class="remember" for="remember"> Remember me</label><br>
+    <button>Log in</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // reset errors
+        emailError.textContent ='';
+        passwordError.textContent = '';
+
+        // get values
+        const email = form.email.value;
+
+        const password = form.password.value;
+        const rememberMe = form.remember.checked;
+        console.log(rememberMe);
+
+        try {
+            const res = await fetch('/login', {
+                method: 'POST',
+                body: JSON.stringify({ email: email, password: password, rememberMe: rememberMe}),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            console.log(data);
+
+            if (data.errors) {
+                emailError.textContent = data.errors.email;
+
+                passwordError.textContent = data.errors.password;
+            }
+
+            if (data.user) {
+                location.assign('/');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+</script>
+
+<%- include ('partials/footer'); -%> 

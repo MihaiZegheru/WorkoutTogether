@@ -1,0 +1,34 @@
+<%- include('partials/header'); -%>
+
+<body>
+
+    <div class="users-list">
+        <div class="d-flex justify-content-between">
+            <h2 class="top-title-card">Your Groups</h2>
+            <img class="image-button" src="/res/addButton.png" alt="add button" id="add-button">
+        </div>
+        
+        <% if(groups.length > 0) { %>
+            <% groups.forEach(group => { %>
+                <div class="user-display-cell">
+                    <a class="single" href="/group/<%= group._id %>">
+                        <img class="profile-img" src="/res/groupPicture.png" alt="profile img">
+                        <h4 class="profile-username" ><%= group.groupname %></h4>   
+                    </a>
+                </div>
+          <% }); %>
+        <% } else { %>
+            <p>There are no groups to display.</p>
+        <% } %>
+      </div>
+
+</body>
+
+<script>
+    const addButton = document.getElementById("add-button").onclick = function redirectToCreateNewGroup() {
+        window.location.assign("group/create");
+    };
+</script>
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>

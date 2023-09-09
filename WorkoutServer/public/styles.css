@@ -1,0 +1,245 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 20px 25px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  background: #fafafa;
+}
+h1, h2, h3, h4, h5, ul, li, a, p, input, label, button, div, footer { 
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  color: rgb(228, 224, 210);
+  font-size: 20px;
+  align-self: center;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 90px;
+}
+nav h1 {
+  font-size: 16px;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+}
+nav li {
+  margin-left: 20px;
+  font-size: 15px;
+}
+.link-button {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.5em;
+  display: block;
+  letter-spacing: 2px;
+}
+p {
+  font-size: 0.7em;
+}
+
+.btn {
+  border-radius: 36px;
+  background: #FEE996;
+}
+form h2 {
+  font-size: 1em;
+  font-weight: 900;
+  margin-bottom: 40px;
+}
+form {
+  width: 90%;
+  margin: 0 auto;
+  padding: 5px 15px 100px 15px;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  background: white;
+}
+input {
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  font-size: 0.8em;
+  width: 100%;
+}
+label {
+  display: block;
+  margin: 20px 0 10px;
+  font-size: 0.8em;
+}
+.checkbox {
+  width: 10%;
+}
+.remember {
+  display:inline-block;
+}
+button{
+  margin-top: 30px;
+  border-radius: 36px;
+  background: #ff8882;
+  border:0;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.8em;
+  display: block;
+  padding: 10px 16px;
+  letter-spacing: 2px;
+}
+
+.radio-button {
+  background: #9dbeb9;
+  color: #194350;
+  border-color: #194350;
+}
+
+.error{
+  color: #ff0099;
+  margin: 10px 2px;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+header{
+  display: flex;
+  align-items: center;
+}
+header img{
+  width: 250px;
+  margin-right: 40px;
+}
+header h2{
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+header h3{
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  color: #999;
+}
+header .btn{
+  margin-top: 20px;
+  padding: 12px 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: inline-block;
+  font-size: 0.6em;
+}
+.profile-img{
+  width: 40px;
+  margin: auto 20px auto 4px;
+  float: left;
+}
+footer{
+  text-align: center;
+  margin: 80px auto 80px auto;
+  color: #aaa;
+}
+
+.user-display-cell {
+  margin: 10px auto 40px auto;
+}
+
+.logo-text {
+  margin: auto 10px auto 0px;
+}
+.top-bar {
+  margin: 20px 0px 50px 0px;
+}
+
+h4 {
+  font-size: 0.8em;
+}
+
+.copyright-text {
+  margin-top: 200px;
+  font-size: 0.6em;
+}
+
+.users-list {
+  border-radius: 5px;
+  padding: 20px 10px 20px 10px;
+  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 1);
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 1);
+}
+.bg-gray {
+  background: #393e46;
+}
+body {
+  background: #393e46;
+}
+
+.image-button {
+    width: 30px;
+    height: 30px;
+}
+
+.test-color {
+  background-color: #ff0099;
+}
+.top-title-card {
+  margin: 10px auto 50px auto;
+}
+
+.top-title {
+  margin: 30px auto 50px auto;
+  text-align: center;
+  font-size: 1.7em;
+}
+
+.card-margin {
+  margin: auto auto 30px auto;
+}
+
+.profile-img-big {
+  width: 55px;
+  margin: 0px 10px 0px 4px;
+  padding: 2% 0 2% 0;
+  float: left;
+}
+
+.hamburger-dropdown {
+  width: 20px;
+  margin: auto 20px auto 4px;
+  float: right;
+}
+
+.color-gray {
+  color: #393e46;
+}
+
+h5 {
+  font-size: 0.8em;
+}
+
+.right {
+  float: right;
+}
+
+hr {
+  margin: 60px auto 60px auto;
+  border-top: 6px dotted #9dbeb9;
+  width:10%
+}
+
+.timer {
+  margin: 50px auto 50px auto;
+  font-size: 1.3em;
+}
+
+.table-title {
+  color: #9dbeb9;
+}
+
+

@@ -1,0 +1,57 @@
+<%- include('partials/header'); -%>
+
+
+<body>
+    <form class="bg-gray">
+        <h2>Create a group</h2>
+        <label for="groupname">Group name</label>
+        <input class="bg-gray" type="text" name="groupname" required />
+        <label for="members">Members</label>
+        <select name="members" class="bg-gray" multiple>
+            <% if (friends.length > 0) { %>
+                <% friends.forEach(friend => { %>
+                    <option value="<%= friend._id %>"><%= friend.username %></option>
+                <% }); %>
+              <% } %>
+        </select>
+        <button class="right down-button">Create</button>
+    </form>
+</body>
+
+<script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // get values
+        const groupname = form.groupname.value;
+        const membersId = [];
+        for (var i = 0; i < form.members.options.length; i++) {
+            if (form.members.options[i].selected) {
+                membersId.push(form.members.options[i].value);
+            }
+        }
+        console.log(membersId);
+
+        try {
+            const res = await fetch('/group/create', {
+                method: 'POST',
+                body: JSON.stringify({ groupname: groupname, membersId: membersId }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await res.json();
+            console.log(data);
+
+            if (data.group) {
+                location.assign('/group');
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+</script>
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>

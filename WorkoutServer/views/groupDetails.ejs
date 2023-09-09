@@ -1,0 +1,22 @@
+<%- include('partials/headerGroup'); -%>
+
+<body>
+    <% if(workouts.length > 0) { %>
+        <% workouts.forEach(workout => { %>
+            <div class="card bg-gray card-margin" style="width: 18rem;">
+                <a class="workout-display" href="<%= group._id %>/workout/<%= workout._id %>">
+                    <img src="/res/workoutCardPicture.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= workout.workoutname %></h5>
+                        <p class="card-text">**Quick description** (to be added).</p>
+                    </div>
+                </a>
+            </div>
+        <% }); %>
+    <% } else { %>
+        <p>There are no workouts to display.</p>
+    <% } %>
+</body>
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>

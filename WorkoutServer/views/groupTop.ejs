@@ -1,0 +1,40 @@
+<%- include('partials/headerGroup'); -%>
+
+
+<body class="bg-gray">
+    <div class=" users-list">
+      <h2 class="top-title-card">Top</h2>
+      <% if (members.length > 0) { %>
+        <table class="table table-borderless bg-gray table-hover">
+            <thead>
+                <tr>
+                    <th class="table-title" scope="col">#</th>
+                    <th class="table-title" scope="col">Name</th>
+                    <th class="table-title" scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>             
+                <% for (let i = 0; i < members.length; i++) { %>
+                    <tr>
+                        <th scope="row" class="align-middle table-title"><%= i + 1 %></th>
+                        <th class="align-middle">
+                            <a class="member-display single" href="#"> <!--<%= members[i].memberId %>-->
+                                <h5 class="profile-username" ><%= membersName[i] %></h5>
+                            </a>
+                        </th>
+                        <th class="align-middle" ><h5 class="profile-username"><%= members[i].memberPoints %></h5></th>   
+                        
+                    </tr>
+                <% } %>      
+            </tbody>
+        </table>
+      <% } else { %>
+          <p>There are no users to display.</p>
+      <% } %>
+    </div>
+  
+  </body>
+
+
+<%- include('partials/nav'); -%>
+<%- include('partials/footer'); -%>
